@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(46, 5, 5, 0.7)), url('images/home-screen-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.card-text:hover{
+    background-color: blue;
+    cursor: pointer;
+    color: white;
+    transition: .2s;
+}
+.card-text.active{
+    background-color: green;
+    color: white;
+    transition: .2s;
+}
+.card{
+    width: 700px;
+    margin: 0 auto;
+}
+.form_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+form{    
+    display: flex;
+    flex-direction: column;
+}
+#userName{
+    width: 320px;
+    padding: 8px 10px;
+    margin: 10px 0;
+    outline: none;
+    font-size: 1rem;
+}
+.submit_button{
+    display: inline-block;
+    border: none;
+    background-color: #cecece;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    padding: 8px 0;
+    width: 50%;
+    margin: 0 auto;
+    outline: none;
+    cursor: pointer;
+}
+.result_container{
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+}
+.resultImg_container{
+    width: 350px;
+    margin: 0 auto;
+}
+.resultImg_container #resultImg{
+    width: 100%;
+}
+.result_container > #result{
+    font-size: 2rem;
+    margin: 20px 0;
+    font-weight: 500;
+}
+.result_container > button{
+    border: none;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    outline: none;
+}
+@media screen and (max-width: 700px){ 
+    .card{
+        width: 100%;
+    }
+}
