@@ -6,6 +6,8 @@ var userForm = document.getElementById('userForm');
 var userName = document.getElementById('userName');
 var userNameSubmitBtn = document.getElementById('userName_submit_button');
 var resultImg = document.getElementById('resultImg');
+var minutes = document.getElementById('Minutes');
+var seconds = document.getElementById('Seconds');
 
 
 var questionsArray = [
@@ -70,6 +72,8 @@ function questionElement(e){
     
     var userSessionName = sessionStorage.getItem('userName');
     quizHeading.innerHTML = `Hello ${userSessionName}`;
+    
+    timer();
 }
 
 
@@ -106,30 +110,29 @@ function comparison(x){
     }
 }
 
-function showResult(){
-    if(questionCount == questionsArray.length){
-        window.location.href = 'result.html'
-    }
-    var result = document.getElementById('result');
-    sessionStorage.setItem('userScore', scores);
-}
-function takingElementsFromResultPage(){
-    var cs = sessionStorage.getItem('userScore');
-    var result = document.getElementById('result');
-    result.innerHTML = 'your score is ' + cs + ' out of 50';
-    if(sessionStorage.getItem('userScore') > 20){
-        resultImg.src = 'images/congratulation-image.png';
-    }
-    else{
-        resultImg.src = 'images/lost-image.png';
-    }
-}
 
-function quizAgain(){
-    window.location.href = 'index.html';
-    sessionStorage.clear();
-    sessionStorage.removeItem('userName');
+/* countdown timer */
+var min = 1;
+var sec = 00;
+function timer(){
+    setInterval(function(){
+        if(sec == 0 && min == 1){
+            min = 0;
+            sec = 59;
+        }
+        else if(sec > 0){
+                sec--;
+        }
+        else if( sec == 0  && min == 0){
+            window.location.href = 'result.html';
+        };
+        minutes.innerHTML = min;
+        seconds.innerHTML = sec;
+        sessionStorage.setItem('sec', sec);
+        sessionStorage.setItem('min', min);
+    }, 1000)
 }
+clearInterval();
 
 userForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -142,3 +145,32 @@ userForm.addEventListener('submit', e => {
         userName.value = '';
     }
 })
+
+function showResult(){
+    if(questionCount == questionsArray.length){
+        window.location.href = 'result.html'
+    }
+    var result = document.getElementById('result');
+    sessionStorage.setItem('userScore', scores);
+}
+function takingElementsFromResultPage(){
+    var timerSec = sessionStorage.getItem('sec');
+    var timerMin = sessionStorage.getItem('min');
+    var cs = sessionStorage.getItem('userScore');
+    var result = document.getElementById('result');
+    result.innerHTML = 'your score is ' + cs + ' out of 50';
+    if(timerSec == 0 && timerMin == 0){
+        result.innerHTML = 'your score is 0 out of 50';
+    }
+    if(sessionStorage.getItem('userScore') > 20){
+        resultImg.src = 'images/congratulation-image.png';
+    }
+    else{
+        resultImg.src = 'images/lost-image.png';
+    }
+}
+
+function quizAgain(){
+    window.location.href = 'index.html';
+    sessionStorage.clear();
+}

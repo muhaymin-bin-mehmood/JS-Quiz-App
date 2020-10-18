@@ -82,6 +82,7 @@ form{
     text-transform: uppercase;
     padding: 10px 30px;
     outline: none;
+    cursor: pointer;
 }
 @media screen and (max-width: 700px){ 
     .card{
