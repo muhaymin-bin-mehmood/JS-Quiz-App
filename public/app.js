@@ -72,8 +72,6 @@ function questionElement(e){
     
     var userSessionName = sessionStorage.getItem('userName');
     quizHeading.innerHTML = `Hello ${userSessionName}`;
-    
-    timer();
 }
 
 
@@ -112,26 +110,31 @@ function comparison(x){
 
 
 /* countdown timer */
-var min = 1;
+var min = 01;
 var sec = 00;
 function timer(){
     setInterval(function(){
-        if(sec == 0 && min == 1){
-            min = 0;
+        if(sec == 00 && min == 01){
+            min = 00;
             sec = 59;
         }
         else if(sec > 0){
                 sec--;
         }
-        else if( sec == 0  && min == 0){
+        else if( sec == 00  && min == 00){
             window.location.href = 'result.html';
         };
         minutes.innerHTML = min;
-        seconds.innerHTML = sec;
+        if(sec <= 09){
+            seconds.innerHTML = '0' + sec;
+        }else{
+            seconds.innerHTML = sec;
+        }
         sessionStorage.setItem('sec', sec);
         sessionStorage.setItem('min', min);
     }, 1000)
 }
+sessionStorage.setItem('timerFunction', timer());
 clearInterval();
 
 userForm.addEventListener('submit', e => {
@@ -143,6 +146,7 @@ userForm.addEventListener('submit', e => {
     else{
         window.location.href = 'quiz.html'
         userName.value = '';
+        sessionStorage.getItem('timerFunction');
     }
 })
 
@@ -152,6 +156,7 @@ function showResult(){
     }
     var result = document.getElementById('result');
     sessionStorage.setItem('userScore', scores);
+    sessionStorage.removeItem('timerFunction');
 }
 function takingElementsFromResultPage(){
     var timerSec = sessionStorage.getItem('sec');
